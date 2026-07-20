@@ -1,8 +1,10 @@
 package com.ntnh.ntnhcore;
 
 import com.ntnh.ntnhcore.modules.ModuleManager;
+import com.ntnh.coloredhearts.ColoredHearts;
 import com.thomass47.fastequip.FastEquip;
 import com.thomass47.grassisannoying.GrassIsAnnoying;
+import com.tterrag.betterplacement.BetterPlacement;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -23,6 +25,8 @@ public class CommonProxy {
 
         ModuleManager.register(new FastEquip());
         ModuleManager.register(new GrassIsAnnoying());
+        ModuleManager.register(new ColoredHearts());
+        ModuleManager.register(new BetterPlacement());
         ModuleManager.preInit(event);
     }
 
@@ -37,5 +41,7 @@ public class CommonProxy {
     }
 
     // register server commands in this event handler (Remove if not needed)
-    public void serverStarting(FMLServerStartingEvent event) {}
+    public void serverStarting(FMLServerStartingEvent event) {
+        ModuleManager.serverStarting(event);
+    }
 }

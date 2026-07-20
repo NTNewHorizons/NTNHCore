@@ -11,6 +11,7 @@ import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
@@ -51,4 +52,7 @@ public class FastEquip implements IModule {
 
     @Override
     public void postInit(FMLPostInitializationEvent event) {}
+
+    @Override
+    public void serverStarting(FMLServerStartingEvent event) {}
 }

@@ -1,9 +1,9 @@
-package com.thomass47.grassisannoying;
+package com.ntnh.coloredhearts;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.ntnh.ntnhcore.Config;
+import com.ntnh.ntnhcore.Tags;
 import com.ntnh.ntnhcore.modules.IModule;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -14,10 +14,12 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-public class GrassIsAnnoying implements IModule {
+public class ColoredHearts implements IModule {
 
-    public static final String MODULE_ID = "grassisannoying";
+    public static final String MODULE_ID = "coloredhearts";
     public static final Logger LOG = LogManager.getLogger(MODULE_ID);
+
+    private HealthBarRenderer healthBarRenderer;
 
     @Override
     public String getModuleId() {
@@ -26,20 +28,21 @@ public class GrassIsAnnoying implements IModule {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
-        LOG.info(
-            "Grass annoyance reduced by " + (int) ((Config.grassIsAnnoyingModEnabled ? Math.random() / 2.0 + 0.5 : 0) * 100) + "%");
+        LOG.info("I am Colored Hearts Mod at version " + Tags.VERSION);
     }
 
     @Override
     public void init(FMLInitializationEvent event) {
         if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
-            MinecraftForge.EVENT_BUS.register(new AttackThroughGrassHandler());
+            healthBarRenderer = new HealthBarRenderer();
+            MinecraftForge.EVENT_BUS.register(healthBarRenderer);
         }
     }
 
     @Override
     public void postInit(FMLPostInitializationEvent event) {}
 
-    @Override
-    public void serverStarting(FMLServerStartingEvent event) {}
+    public void serverStarting(FMLServerStartingEvent event) {
+        event.registerServerCommand(new SetMaxHealthCommand());
+    }
 }

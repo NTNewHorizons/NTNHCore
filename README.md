@@ -12,6 +12,8 @@ Each module can be enabled or disabled via the `modules` category in the config:
 modules {
     B:enable_fastequip=true
     B:enable_grassisannoying=true
+    B:enable_coloredhearts=true
+    B:enable_betterplacement=true
 }
 ```
 
@@ -30,3 +32,16 @@ Attack entities through grass and hide the block outline when aiming at an entit
 
 - `isModEnabled` - enable attacking through grass
 - `hideBlockOutline` - hide the block outline when aiming at an entity through grass
+
+### ColoredHearts
+
+Custom colored health bar overlay with support for poison/wither tints, absorption, regeneration bounce, low-health shake, and >240 HP glow overlays.
+
+- No additional config options (controlled by module enable toggle)
+
+### BetterPlacement
+
+Snappier block placement by removing the right-click delay when moving the cursor to a new location.
+
+- `creativeOnly` - only apply in creative mode
+- `forceNewLoc` - require cursor movement between successive placements

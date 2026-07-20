@@ -17,6 +17,8 @@ public class Config {
     // Module enable toggles (category: modules)
     public static boolean moduleFastEquipEnabled = true;
     public static boolean moduleGrassIsAnnoyingEnabled = true;
+    public static boolean moduleColoredHeartsEnabled = true;
+    public static boolean moduleBetterPlacementEnabled = true;
 
     // FastEquip module - right-click to equip armor from hotbar/inventory
     public static boolean fastEquipHotbarEnabled = true;
@@ -25,6 +27,10 @@ public class Config {
     // GrassIsAnnoying module - attack entities through grass and hide block outline
     public static boolean grassIsAnnoyingModEnabled = true;
     public static boolean grassIsAnnoyingHideBlockOutline = true;
+
+    // BetterPlacement module - snappier block placement
+    public static boolean betterPlacementCreativeOnly = false;
+    public static boolean betterPlacementForceNewLoc = true;
 
     public static void synchronizeConfiguration(File configFile) {
         configuration = new Configuration(configFile);
@@ -43,6 +49,12 @@ public class Config {
         moduleGrassIsAnnoyingEnabled = configuration.getBoolean(
             "enable_grassisannoying", "modules", moduleGrassIsAnnoyingEnabled,
             "Set to false to disable the GrassIsAnnoying module");
+        moduleColoredHeartsEnabled = configuration.getBoolean(
+            "enable_coloredhearts", "modules", moduleColoredHeartsEnabled,
+            "Set to false to disable the ColoredHearts module");
+        moduleBetterPlacementEnabled = configuration.getBoolean(
+            "enable_betterplacement", "modules", moduleBetterPlacementEnabled,
+            "Set to false to disable the BetterPlacement module");
 
         // FastEquip module - right-click to equip armor from hotbar/inventory
         configuration.setCategoryComment("modules.fastequip", "FastEquip module - right-click to equip armor from hotbar/inventory");
@@ -62,6 +74,15 @@ public class Config {
             "hideBlockOutline", "modules.grassisannoying", grassIsAnnoyingHideBlockOutline,
             "Set to false to keep the block outline when aiming at an entity through grass");
 
+        // BetterPlacement module - snappier block placement
+        configuration.setCategoryComment("modules.betterplacement", "BetterPlacement module - remove right-click delay for snappier block placement");
+        betterPlacementCreativeOnly = configuration.getBoolean(
+            "creativeOnly", "modules.betterplacement", betterPlacementCreativeOnly,
+            "If true, the modifications will only apply in creative mode");
+        betterPlacementForceNewLoc = configuration.getBoolean(
+            "forceNewLoc", "modules.betterplacement", betterPlacementForceNewLoc,
+            "When true, a held right click will never place two blocks in a row, the player must move the cursor to a new location");
+
         if (configuration.hasChanged()) {
             configuration.save();
         }
@@ -73,6 +94,10 @@ public class Config {
                 return moduleFastEquipEnabled;
             case "grassisannoying":
                 return moduleGrassIsAnnoyingEnabled;
+            case "coloredhearts":
+                return moduleColoredHeartsEnabled;
+            case "betterplacement":
+                return moduleBetterPlacementEnabled;
             default:
                 return false;
         }
