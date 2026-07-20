@@ -1,5 +1,9 @@
 package com.ntnh.ntnhcore;
 
+import com.ntnh.ntnhcore.modules.ModuleManager;
+import com.thomass47.fastequip.FastEquip;
+import com.thomass47.grassisannoying.GrassIsAnnoying;
+
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -14,13 +18,23 @@ public class CommonProxy {
 
         NTNHCore.LOG.info(Config.greeting);
         NTNHCore.LOG.info("I am NTNHCore at version " + Tags.VERSION);
+
+        cpw.mods.fml.common.FMLCommonHandler.instance().bus().register(new Config());
+
+        ModuleManager.register(new FastEquip());
+        ModuleManager.register(new GrassIsAnnoying());
+        ModuleManager.preInit(event);
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
-    public void init(FMLInitializationEvent event) {}
+    public void init(FMLInitializationEvent event) {
+        ModuleManager.init(event);
+    }
 
     // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)
-    public void postInit(FMLPostInitializationEvent event) {}
+    public void postInit(FMLPostInitializationEvent event) {
+        ModuleManager.postInit(event);
+    }
 
     // register server commands in this event handler (Remove if not needed)
     public void serverStarting(FMLServerStartingEvent event) {}
