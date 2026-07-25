@@ -1,6 +1,4 @@
-package com.thomass47.fastequip;
-
-import com.ntnh.ntnhcore.Config;
+package com.ntnh.ntnhcore.modules.thomass47.fastequip;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -11,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.GuiScreenEvent;
 
 import org.lwjgl.input.Mouse;
+
+import com.ntnh.ntnhcore.Config;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -47,7 +47,8 @@ public class ClientFastEquipHandler {
                             if (!isClickingArmorSlot) {
                                 // Send packet to server to perform the swap
                                 FastEquip.network.sendToServer(
-                                    new com.thomass47.fastequip.network.PacketFastEquip(hoveredSlot.slotNumber));
+                                    new com.ntnh.ntnhcore.modules.thomass47.fastequip.network.PacketFastEquip(
+                                        hoveredSlot.slotNumber));
 
                                 // Visually clear the cursor on the client immediately to avoid flicker
                                 mc.thePlayer.inventory.setItemStack(null);

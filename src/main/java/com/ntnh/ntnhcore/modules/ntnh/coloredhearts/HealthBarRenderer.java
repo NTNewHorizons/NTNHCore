@@ -1,4 +1,4 @@
-package com.ntnh.coloredhearts;
+package com.ntnh.ntnhcore.modules.ntnh.coloredhearts;
 
 import static net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType.HEALTH;
 

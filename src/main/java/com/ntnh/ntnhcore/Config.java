@@ -44,43 +44,69 @@ public class Config {
         // Module enable toggles
         configuration.setCategoryComment("modules", "Master toggles to enable or disable entire modules");
         moduleFastEquipEnabled = configuration.getBoolean(
-            "enable_fastequip", "modules", moduleFastEquipEnabled,
+            "enable_fastequip",
+            "modules",
+            moduleFastEquipEnabled,
             "Set to false to disable the FastEquip module");
         moduleGrassIsAnnoyingEnabled = configuration.getBoolean(
-            "enable_grassisannoying", "modules", moduleGrassIsAnnoyingEnabled,
+            "enable_grassisannoying",
+            "modules",
+            moduleGrassIsAnnoyingEnabled,
             "Set to false to disable the GrassIsAnnoying module");
         moduleColoredHeartsEnabled = configuration.getBoolean(
-            "enable_coloredhearts", "modules", moduleColoredHeartsEnabled,
+            "enable_coloredhearts",
+            "modules",
+            moduleColoredHeartsEnabled,
             "Set to false to disable the ColoredHearts module");
         moduleBetterPlacementEnabled = configuration.getBoolean(
-            "enable_betterplacement", "modules", moduleBetterPlacementEnabled,
+            "enable_betterplacement",
+            "modules",
+            moduleBetterPlacementEnabled,
             "Set to false to disable the BetterPlacement module");
 
         // FastEquip module - right-click to equip armor from hotbar/inventory
-        configuration.setCategoryComment("modules.fastequip", "FastEquip module - right-click to equip armor from hotbar/inventory");
+        configuration.setCategoryComment(
+            "modules.fastequip",
+            "FastEquip module - right-click to equip armor from hotbar/inventory");
         fastEquipHotbarEnabled = configuration.getBoolean(
-            "isHotbarFastEquipEnabled", "modules.fastequip", fastEquipHotbarEnabled,
+            "isHotbarFastEquipEnabled",
+            "modules.fastequip",
+            fastEquipHotbarEnabled,
             "Set to false to disable fast armor equip when right clicking in hotbar");
         fastEquipInventoryEnabled = configuration.getBoolean(
-            "isInventoryFastEquipEnabled", "modules.fastequip", fastEquipInventoryEnabled,
+            "isInventoryFastEquipEnabled",
+            "modules.fastequip",
+            fastEquipInventoryEnabled,
             "Set to false to disable fast armor equip when right clicking in inventory");
 
         // GrassIsAnnoying module - attack entities through grass and hide block outline
-        configuration.setCategoryComment("modules.grassisannoying", "GrassIsAnnoying module - attack entities through grass and hide block outline");
+        configuration.setCategoryComment(
+            "modules.grassisannoying",
+            "GrassIsAnnoying module - attack entities through grass and hide block outline");
         grassIsAnnoyingModEnabled = configuration.getBoolean(
-            "isModEnabled", "modules.grassisannoying", grassIsAnnoyingModEnabled,
+            "isModEnabled",
+            "modules.grassisannoying",
+            grassIsAnnoyingModEnabled,
             "Set to false to disable attacking through grass");
         grassIsAnnoyingHideBlockOutline = configuration.getBoolean(
-            "hideBlockOutline", "modules.grassisannoying", grassIsAnnoyingHideBlockOutline,
+            "hideBlockOutline",
+            "modules.grassisannoying",
+            grassIsAnnoyingHideBlockOutline,
             "Set to false to keep the block outline when aiming at an entity through grass");
 
         // BetterPlacement module - snappier block placement
-        configuration.setCategoryComment("modules.betterplacement", "BetterPlacement module - remove right-click delay for snappier block placement");
+        configuration.setCategoryComment(
+            "modules.betterplacement",
+            "BetterPlacement module - remove right-click delay for snappier block placement");
         betterPlacementCreativeOnly = configuration.getBoolean(
-            "creativeOnly", "modules.betterplacement", betterPlacementCreativeOnly,
+            "creativeOnly",
+            "modules.betterplacement",
+            betterPlacementCreativeOnly,
             "If true, the modifications will only apply in creative mode");
         betterPlacementForceNewLoc = configuration.getBoolean(
-            "forceNewLoc", "modules.betterplacement", betterPlacementForceNewLoc,
+            "forceNewLoc",
+            "modules.betterplacement",
+            betterPlacementForceNewLoc,
             "When true, a held right click will never place two blocks in a row, the player must move the cursor to a new location");
 
         if (configuration.hasChanged()) {

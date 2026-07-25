@@ -1,8 +1,6 @@
-package com.thomass47.grassisannoying;
+package com.ntnh.ntnhcore.modules.thomass47.grassisannoying;
 
 import java.util.List;
-
-import com.ntnh.ntnhcore.Config;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -11,6 +9,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.client.event.MouseEvent;
+
+import com.ntnh.ntnhcore.Config;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 

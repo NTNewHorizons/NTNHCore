@@ -1,4 +1,4 @@
-package com.thomass47.fastequip.network;
+package com.ntnh.ntnhcore.modules.thomass47.fastequip.network;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemArmor;

@@ -1,10 +1,10 @@
 package com.ntnh.ntnhcore;
 
 import com.ntnh.ntnhcore.modules.ModuleManager;
-import com.ntnh.coloredhearts.ColoredHearts;
-import com.thomass47.fastequip.FastEquip;
-import com.thomass47.grassisannoying.GrassIsAnnoying;
-import com.tterrag.betterplacement.BetterPlacement;
+import com.ntnh.ntnhcore.modules.ntnh.coloredhearts.ColoredHearts;
+import com.ntnh.ntnhcore.modules.thomass47.fastequip.FastEquip;
+import com.ntnh.ntnhcore.modules.thomass47.grassisannoying.GrassIsAnnoying;
+import com.ntnh.ntnhcore.modules.tterrag.betterplacement.BetterPlacement;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -21,7 +21,9 @@ public class CommonProxy {
         NTNHCore.LOG.info(Config.greeting);
         NTNHCore.LOG.info("I am NTNHCore at version " + Tags.VERSION);
 
-        cpw.mods.fml.common.FMLCommonHandler.instance().bus().register(new Config());
+        cpw.mods.fml.common.FMLCommonHandler.instance()
+            .bus()
+            .register(new Config());
 
         ModuleManager.register(new FastEquip());
         ModuleManager.register(new GrassIsAnnoying());

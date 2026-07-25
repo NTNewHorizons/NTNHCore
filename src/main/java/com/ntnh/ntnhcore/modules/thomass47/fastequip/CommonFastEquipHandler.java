@@ -1,10 +1,10 @@
-package com.thomass47.fastequip;
-
-import com.ntnh.ntnhcore.Config;
+package com.ntnh.ntnhcore.modules.thomass47.fastequip;
 
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+
+import com.ntnh.ntnhcore.Config;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 

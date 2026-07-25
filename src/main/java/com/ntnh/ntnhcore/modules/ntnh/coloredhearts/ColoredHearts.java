@@ -1,12 +1,12 @@
-package com.ntnh.coloredhearts;
+package com.ntnh.ntnhcore.modules.ntnh.coloredhearts;
+
+import net.minecraftforge.common.MinecraftForge;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.ntnh.ntnhcore.Tags;
 import com.ntnh.ntnhcore.modules.IModule;
-
-import net.minecraftforge.common.MinecraftForge;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -33,7 +33,9 @@ public class ColoredHearts implements IModule {
 
     @Override
     public void init(FMLInitializationEvent event) {
-        if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+        if (FMLCommonHandler.instance()
+            .getEffectiveSide()
+            .isClient()) {
             healthBarRenderer = new HealthBarRenderer();
             MinecraftForge.EVENT_BUS.register(healthBarRenderer);
         }

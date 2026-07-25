@@ -1,12 +1,12 @@
-package com.thomass47.fastequip;
+package com.ntnh.ntnhcore.modules.thomass47.fastequip;
+
+import net.minecraftforge.common.MinecraftForge;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.ntnh.ntnhcore.Config;
 import com.ntnh.ntnhcore.modules.IModule;
-
-import net.minecraftforge.common.MinecraftForge;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -31,9 +31,10 @@ public class FastEquip implements IModule {
     public void preInit(FMLPreInitializationEvent event) {
         network = NetworkRegistry.INSTANCE.newSimpleChannel("fastequip");
         network.registerMessage(
-            com.thomass47.fastequip.network.PacketFastEquip.Handler.class,
-            com.thomass47.fastequip.network.PacketFastEquip.class,
-            0, Side.SERVER);
+            com.ntnh.ntnhcore.modules.thomass47.fastequip.network.PacketFastEquip.Handler.class,
+            com.ntnh.ntnhcore.modules.thomass47.fastequip.network.PacketFastEquip.class,
+            0,
+            Side.SERVER);
 
         int features = (Config.fastEquipHotbarEnabled ? 1 : 0) + (Config.fastEquipInventoryEnabled ? 1 : 0);
         LOG.info(
@@ -45,7 +46,9 @@ public class FastEquip implements IModule {
     @Override
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new CommonFastEquipHandler());
-        if (cpw.mods.fml.common.FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+        if (cpw.mods.fml.common.FMLCommonHandler.instance()
+            .getEffectiveSide()
+            .isClient()) {
             MinecraftForge.EVENT_BUS.register(new ClientFastEquipHandler());
         }
     }
