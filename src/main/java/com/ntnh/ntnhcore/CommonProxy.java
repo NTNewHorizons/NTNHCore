@@ -4,7 +4,6 @@ import com.ntnh.ntnhcore.modules.ModuleManager;
 import com.ntnh.ntnhcore.modules.ntnh.coloredhearts.ColoredHearts;
 import com.ntnh.ntnhcore.modules.thomass47.fastequip.FastEquip;
 import com.ntnh.ntnhcore.modules.thomass47.grassisannoying.GrassIsAnnoying;
-import com.ntnh.ntnhcore.modules.tterrag.betterplacement.BetterPlacement;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -25,11 +24,14 @@ public class CommonProxy {
             .bus()
             .register(new Config());
 
+        registerModules();
+        ModuleManager.preInit(event);
+    }
+
+    protected void registerModules() {
         ModuleManager.register(new FastEquip());
         ModuleManager.register(new GrassIsAnnoying());
         ModuleManager.register(new ColoredHearts());
-        ModuleManager.register(new BetterPlacement());
-        ModuleManager.preInit(event);
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)

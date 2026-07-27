@@ -1,8 +1,13 @@
 package com.ntnh.ntnhcore;
 
+import com.ntnh.ntnhcore.modules.ModuleManager;
+import com.ntnh.ntnhcore.modules.tterrag.betterplacement.BetterPlacement;
+
 public class ClientProxy extends CommonProxy {
 
-    // Override CommonProxy methods here, if you want a different behaviour on the client (e.g. registering renders).
-    // Don't forget to call the super methods as well.
-
+    @Override
+    protected void registerModules() {
+        super.registerModules();
+        ModuleManager.register(new BetterPlacement());
+    }
 }
