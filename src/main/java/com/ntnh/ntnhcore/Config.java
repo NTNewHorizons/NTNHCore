@@ -15,6 +15,7 @@ public class Config {
     public static String greeting = "Hello World";
 
     // Module enable toggles (category: modules)
+    public static boolean moduleCommandCompletionEnabled = true;
     public static boolean moduleFastEquipEnabled = true;
     public static boolean moduleGrassIsAnnoyingEnabled = true;
     public static boolean moduleColoredHeartsEnabled = true;
@@ -43,6 +44,11 @@ public class Config {
 
         // Module enable toggles
         configuration.setCategoryComment("modules", "Master toggles to enable or disable entire modules");
+        moduleCommandCompletionEnabled = configuration.getBoolean(
+            "enable_commandcompletion",
+            "modules",
+            moduleCommandCompletionEnabled,
+            "Set to false to disable the CommandCompletion module");
         moduleFastEquipEnabled = configuration.getBoolean(
             "enable_fastequip",
             "modules",
@@ -116,6 +122,8 @@ public class Config {
 
     public static boolean isModuleEnabled(String moduleId) {
         switch (moduleId) {
+            case "commandcompletion":
+                return moduleCommandCompletionEnabled;
             case "fastequip":
                 return moduleFastEquipEnabled;
             case "grassisannoying":
