@@ -14,6 +14,7 @@ modules {
     B:enable_grassisannoying=true
     B:enable_coloredhearts=true
     B:enable_betterplacement=true
+    B:enable_whitelistdementianomore=true
 }
 ```
 
@@ -45,3 +46,9 @@ Snappier block placement by removing the right-click delay when moving the curso
 
 - `creativeOnly` - only apply in creative mode
 - `forceNewLoc` - require cursor movement between successive placements
+
+### WhitelistDementiaNoMore
+
+Fixes server whitelist offline mode UUID mismatches when adding players to the whitelist.
+
+- No additional config options (controlled by module enable toggle)

@@ -19,6 +19,7 @@ public class Config {
     public static boolean moduleGrassIsAnnoyingEnabled = true;
     public static boolean moduleColoredHeartsEnabled = true;
     public static boolean moduleBetterPlacementEnabled = true;
+    public static boolean moduleWhitelistDementiaNoMoreEnabled = true;
 
     // FastEquip module - right-click to equip armor from hotbar/inventory
     public static boolean fastEquipHotbarEnabled = true;
@@ -63,6 +64,11 @@ public class Config {
             "modules",
             moduleBetterPlacementEnabled,
             "Set to false to disable the BetterPlacement module");
+        moduleWhitelistDementiaNoMoreEnabled = configuration.getBoolean(
+            "enable_whitelistdementianomore",
+            "modules",
+            moduleWhitelistDementiaNoMoreEnabled,
+            "Set to false to disable the WhitelistDementiaNoMore module");
 
         // FastEquip module - right-click to equip armor from hotbar/inventory
         configuration.setCategoryComment(
@@ -124,6 +130,8 @@ public class Config {
                 return moduleColoredHeartsEnabled;
             case "betterplacement":
                 return moduleBetterPlacementEnabled;
+            case "whitelistdementianomore":
+                return moduleWhitelistDementiaNoMoreEnabled;
             default:
                 return false;
         }
