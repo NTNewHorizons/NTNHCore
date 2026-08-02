@@ -1,6 +1,7 @@
 package com.ntnh.ntnhcore;
 
 import com.ntnh.ntnhcore.modules.ModuleManager;
+import com.ntnh.ntnhcore.modules.bufka.commandcompletion.CommandCompletion;
 import com.ntnh.ntnhcore.modules.ntnh.coloredhearts.ColoredHearts;
 import com.ntnh.ntnhcore.modules.thomass47.fastequip.FastEquip;
 import com.ntnh.ntnhcore.modules.thomass47.grassisannoying.GrassIsAnnoying;
@@ -34,6 +35,7 @@ public class CommonProxy {
         ModuleManager.register(new GrassIsAnnoying());
         ModuleManager.register(new ColoredHearts());
         ModuleManager.register(new WhitelistDementiaNoMore());
+        ModuleManager.register(new CommandCompletion());
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
