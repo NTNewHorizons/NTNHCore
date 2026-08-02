@@ -3,6 +3,7 @@ package com.ntnh.ntnhcore.modules.bufka.commandcompletion.client;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSleepMP;
+import net.minecraftforge.client.event.GuiOpenEvent;
 
 import com.bufka.commandcompletion.client.gui.chat.ChatScreen;
 import com.bufka.commandcompletion.client.gui.chat.IModChat;
@@ -10,7 +11,6 @@ import com.bufka.commandcompletion.client.gui.chat.MPChatScreen;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.client.event.GuiOpenEvent;
 
 public class GuiHandler {
 
