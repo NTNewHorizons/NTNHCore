@@ -87,7 +87,8 @@ public class MPChatScreen extends GuiSleepMP implements IModChat {
     }
 
     private void navigateSentHistory(int direction) {
-        List<String> sentMessages = this.mc.ingameGUI.getChatGUI().getSentMessages();
+        List<String> sentMessages = this.mc.ingameGUI.getChatGUI()
+            .getSentMessages();
         int len = sentMessages.size();
         if (len == 0) return;
 
