@@ -21,7 +21,9 @@ public class ChatScreen extends GuiChat implements IModChat {
 
     private static String getInitialText(GuiChat chat) {
         try {
-            return ReflectionHelper.getPrivateValue(GuiChat.class, chat,
+            return ReflectionHelper.getPrivateValue(
+                GuiChat.class,
+                chat,
                 new String[] { "defaultInputFieldText", "field_146409_v", "field_146410_g" });
         } catch (Exception e) {
             return "";
@@ -32,7 +34,8 @@ public class ChatScreen extends GuiChat implements IModChat {
     public void initGui() {
         super.initGui();
         this.completer = new Completor(this.inputField);
-        if (!this.inputField.getText().isEmpty()) {
+        if (!this.inputField.getText()
+            .isEmpty()) {
             this.completer.requestUpdate();
         }
     }
@@ -103,7 +106,8 @@ public class ChatScreen extends GuiChat implements IModChat {
     }
 
     private void navigateSentHistory(int direction) {
-        List<String> sentMessages = this.mc.ingameGUI.getChatGUI().getSentMessages();
+        List<String> sentMessages = this.mc.ingameGUI.getChatGUI()
+            .getSentMessages();
         int len = sentMessages.size();
         if (len == 0) return;
 

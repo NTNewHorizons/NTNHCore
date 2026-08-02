@@ -30,8 +30,12 @@ public class CommandCompletion implements IModule {
 
     @Override
     public void init(FMLInitializationEvent event) {
-        if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
-            FMLCommonHandler.instance().bus().register(new GuiHandler());
+        if (FMLCommonHandler.instance()
+            .getEffectiveSide()
+            .isClient()) {
+            FMLCommonHandler.instance()
+                .bus()
+                .register(new GuiHandler());
         }
     }
 
