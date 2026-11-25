@@ -56,9 +56,9 @@ Fixes server whitelist offline mode UUID mismatches when adding players to the w
 
 ### GravityGunFix
 
-Makes GravityGun break and place blocks properly instead of moving their tile entity NBT, which broke multiblocks and machines. Contents are kept for blocks that keep them when mined (e.g. batteries and crates), and dropped otherwise. Also lets Storage Drawers be grabbed.
+Makes GravityGun break and place blocks properly instead of moving their tile entity NBT, which broke multiblocks and machines. Contents are kept for blocks that keep them when mined (e.g. batteries and crates), and dropped otherwise. Also lets Storage Drawers and hoppers be grabbed.
 
 - `maxBreaks` - how many times to break a block that turns into another one, like assembled multiblock parts
 - `superchargedPulling` - let the supercharged gun pull chests and `grabbableBlocks` from a distance, like it could for other blocks
 - `keepDataBlocks` - blocks that keep all of their data when moved (e.g. chests), supports `*` as a wildcard
-- `grabbableBlocks` - blocks that can be grabbed even though they aren't full blocks (e.g. drawers), supports `*` as a wildcard
+- `grabbableBlocks` - blocks that can be grabbed even though they aren't full blocks (e.g. drawers and hoppers), supports `*` as a wildcard
