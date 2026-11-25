@@ -15,6 +15,7 @@ modules {
     B:enable_coloredhearts=true
     B:enable_betterplacement=true
     B:enable_whitelistdementianomore=true
+    B:enable_gravitygunfix=true
 }
 ```
 
@@ -52,3 +53,12 @@ Snappier block placement by removing the right-click delay when moving the curso
 Fixes server whitelist offline mode UUID mismatches when adding players to the whitelist.
 
 - No additional config options (controlled by module enable toggle)
+
+### GravityGunFix
+
+Makes GravityGun break and place blocks by default instead of moving their tile entity NBT, which broke a bunch of stuff like multiblocks. Contents are kept for blocks that keep them when mined, and dropped otherwise. Also lets extra blocks be grabbed.
+
+- `maxBreaks` - how many times to break a block that turns into another one, like assembled multiblock parts
+- `superchargedPulling` - let the supercharged gun pull chests and `grabbableBlocks` from a distance, like it could for other blocks
+- `keepDataBlocks` - blocks that keep all of their data when moved (e.g. chests), supports `*` as a wildcard
+- `grabbableBlocks` - blocks that can be grabbed even though they aren't full blocks (e.g. drawers, hoppers and shulker boxes), supports `*` as a wildcard

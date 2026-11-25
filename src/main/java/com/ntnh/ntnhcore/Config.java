@@ -21,6 +21,7 @@ public class Config {
     public static boolean moduleColoredHeartsEnabled = true;
     public static boolean moduleBetterPlacementEnabled = true;
     public static boolean moduleWhitelistDementiaNoMoreEnabled = true;
+    public static boolean moduleGravityGunFixEnabled = true;
 
     // FastEquip module - right-click to equip armor from hotbar/inventory
     public static boolean fastEquipHotbarEnabled = true;
@@ -33,6 +34,21 @@ public class Config {
     // BetterPlacement module - snappier block placement
     public static boolean betterPlacementCreativeOnly = false;
     public static boolean betterPlacementForceNewLoc = true;
+
+    // GravityGunFix module - make GravityGun break and place blocks properly
+    public static int gravityGunFixMaxBreaks = 4;
+    public static boolean gravityGunFixSuperchargedPulling = true;
+    public static String[] gravityGunFixKeepDataBlocks = { "minecraft:chest", "minecraft:trapped_chest",
+        "minecraft:furnace", "minecraft:lit_furnace", "minecraft:dispenser", "minecraft:dropper", "minecraft:hopper",
+        "minecraft:jukebox", "minecraft:ender_chest", "minecraft:mob_spawner", "rechests:*", "IronChest:BlockIronChest",
+        "etfuturum:*barrel", "etfuturum:smoker", "etfuturum:lit_smoker", "etfuturum:blast_furnace",
+        "etfuturum:lit_blast_furnace", "etfuturum:beehive", "etfuturum:bee_nest", "etfuturum:shulker_box",
+        "hbm:tile.crate_iron", "hbm:tile.crate_steel", "hbm:tile.crate_desh", "hbm:tile.crate_tungsten",
+        "hbm:tile.safe", "StorageDrawers*:fullDrawers*", "StorageDrawers*:halfDrawers*", "StorageDrawers:compDrawers",
+        "StorageDrawers:fullCustom*", "StorageDrawers:halfCustom*" };
+    public static String[] gravityGunFixGrabbableBlocks = { "minecraft:hopper", "etfuturum:shulker_box",
+        "StorageDrawers*:fullDrawers*", "StorageDrawers*:halfDrawers*", "StorageDrawers:compDrawers",
+        "StorageDrawers:fullCustom*", "StorageDrawers:halfCustom*" };
 
     public static void synchronizeConfiguration(File configFile) {
         configuration = new Configuration(configFile);
@@ -75,6 +91,11 @@ public class Config {
             "modules",
             moduleWhitelistDementiaNoMoreEnabled,
             "Set to false to disable the WhitelistDementiaNoMore module");
+        moduleGravityGunFixEnabled = configuration.getBoolean(
+            "enable_gravitygunfix",
+            "modules",
+            moduleGravityGunFixEnabled,
+            "Set to false to disable the GravityGunFix module");
 
         // FastEquip module - right-click to equip armor from hotbar/inventory
         configuration.setCategoryComment(
@@ -121,6 +142,33 @@ public class Config {
             betterPlacementForceNewLoc,
             "When true, a held right click will never place two blocks in a row, the player must move the cursor to a new location");
 
+        // GravityGunFix module - make GravityGun break and place blocks properly
+        configuration.setCategoryComment(
+            "modules.gravitygunfix",
+            "GravityGunFix module - make GravityGun break and place blocks properly");
+        gravityGunFixMaxBreaks = configuration.getInt(
+            "maxBreaks",
+            "modules.gravitygunfix",
+            gravityGunFixMaxBreaks,
+            1,
+            16,
+            "How many times to break what's left in the block's place before giving up. Some assembled NTM multiblock parts turn back into their original block when broken, so they need at least 2 to be grabbed.");
+        gravityGunFixSuperchargedPulling = configuration.getBoolean(
+            "superchargedPulling",
+            "modules.gravitygunfix",
+            gravityGunFixSuperchargedPulling,
+            "Let the supercharged gun pull chests and grabbableBlocks from a distance, like it could for other blocks.");
+        gravityGunFixKeepDataBlocks = configuration.getStringList(
+            "keepDataBlocks",
+            "modules.gravitygunfix",
+            gravityGunFixKeepDataBlocks,
+            "Blocks that keep all of their data when moved by GravityGun. Supports * as a wildcard.\nDon't add multiblocks or anything that remembers where it or other blocks are, moving those will break them.");
+        gravityGunFixGrabbableBlocks = configuration.getStringList(
+            "grabbableBlocks",
+            "modules.gravitygunfix",
+            gravityGunFixGrabbableBlocks,
+            "Blocks that GravityGun can grab even though they aren't full blocks. Supports * as a wildcard.\nThey only keep their data if they're in keepDataBlocks too.");
+
         if (configuration.hasChanged()) {
             configuration.save();
         }
@@ -140,6 +188,8 @@ public class Config {
                 return moduleBetterPlacementEnabled;
             case "whitelistdementianomore":
                 return moduleWhitelistDementiaNoMoreEnabled;
+            case "gravitygunfix":
+                return moduleGravityGunFixEnabled;
             default:
                 return false;
         }
