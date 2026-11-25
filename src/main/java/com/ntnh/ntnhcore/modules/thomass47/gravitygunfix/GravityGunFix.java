@@ -157,8 +157,17 @@ public class GravityGunFix implements IModule {
     }
 
     private static boolean keepsData(Block block) {
+        return matchesAny(block, Config.gravityGunFixKeepDataBlocks);
+    }
+
+    /** GravityGun itself only grabs full blocks and a few others. */
+    public static boolean isMadeGrabbable(Block block) {
+        return Config.moduleGravityGunFixEnabled && matchesAny(block, Config.gravityGunFixGrabbableBlocks);
+    }
+
+    private static boolean matchesAny(Block block, String[] patterns) {
         String name = Block.blockRegistry.getNameForObject(block);
-        for (String pattern : Config.gravityGunFixKeepDataBlocks) {
+        for (String pattern : patterns) {
             String regex = "\\Q" + pattern.trim()
                 .replace("*", "\\E.*\\Q") + "\\E";
             if (name != null && name.matches(regex)) {
@@ -180,6 +189,10 @@ public class GravityGunFix implements IModule {
         if (blank == null) {
             return null;
         }
+        NBTTagCompound blankData = new NBTTagCompound();
+        blank.writeToNBT(blankData);
+        ItemStack stack = getOwnDrop(world, x, y, z, block, meta);
+
         world.setTileEntity(x, y, z, blank);
         world.setBlockToAir(x, y, z);
         if (world.getBlock(x, y, z) == block) {
@@ -203,7 +216,25 @@ public class GravityGunFix implements IModule {
                 inventory.setInventorySlotContents(i, null);
             }
         }
-        return new BrokenBlock(block, meta, null, data);
+        if (isMadeGrabbable(block)) {
+            // The slots of drawers don't hold all of their contents
+            blankData.setInteger("x", x);
+            blankData.setInteger("y", y);
+            blankData.setInteger("z", z);
+            tileEntity.readFromNBT(blankData);
+        }
+        return new BrokenBlock(block, meta, stack, data);
+    }
+
+    private static ItemStack getOwnDrop(World world, int x, int y, int z, Block block, int meta) {
+        for (ItemStack drop : block.getDrops(world, x, y, z, meta, 0)) {
+            if (drop != null && drop.getItem() != null && Block.getBlockFromItem(drop.getItem()) == block) {
+                ItemStack stack = drop.copy();
+                stack.stackSize = 1;
+                return stack;
+            }
+        }
+        return null;
     }
 
     public static boolean placeWithData(World world, int x, int y, int z, Block block, int meta, NBTTagCompound data,
@@ -321,7 +352,10 @@ public class GravityGunFix implements IModule {
 
         public final Block block;
         public final int meta;
-        /** The item the block drops as, or null if it has no tile entity or doesn't drop itself. */
+        /**
+         * The item the block drops as, or null if it has no tile entity or doesn't drop itself. Only used for how it
+         * looks if there's data.
+         */
         public final ItemStack stack;
         /** The tile entity's data, or null if the block isn't configured to keep it. */
         public final NBTTagCompound data;

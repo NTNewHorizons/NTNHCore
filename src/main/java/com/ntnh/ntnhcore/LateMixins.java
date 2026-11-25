@@ -9,6 +9,8 @@ import javax.annotation.Nonnull;
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
 
+import cpw.mods.fml.relauncher.FMLLaunchHandler;
+
 /** Loads mixins that target other mods, only when the mod they target is present. */
 @LateMixin
 public class LateMixins implements ILateMixinLoader {
@@ -23,7 +25,12 @@ public class LateMixins implements ILateMixinLoader {
         List<String> mixins = new ArrayList<>();
         if (loadedMods.contains("GraviGun")) {
             mixins.add("gravigun.MixinEntityBlock");
+            mixins.add("gravigun.MixinEntityHelper");
             mixins.add("gravigun.MixinTickHandlerServer");
+            if (FMLLaunchHandler.side()
+                .isClient()) {
+                mixins.add("gravigun.MixinRenderBlock");
+            }
         }
         return mixins;
     }

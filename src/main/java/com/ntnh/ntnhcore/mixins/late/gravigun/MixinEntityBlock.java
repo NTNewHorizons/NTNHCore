@@ -33,6 +33,10 @@ public abstract class MixinEntityBlock extends Entity implements IHeldBlock {
     @Shadow(remap = false)
     public TileEntity tileEntity;
 
+    /** GravityGun itself uses 16 and 17 */
+    @Unique
+    private static final int RENDERED_STACK_ID = 18;
+
     @Unique
     private WeakReference<EntityPlayer> gravityGunFix$holder;
 
@@ -49,9 +53,40 @@ public abstract class MixinEntityBlock extends Entity implements IHeldBlock {
     @Shadow(remap = false)
     public abstract void setBlockIdAndMeta(Block block, int meta);
 
+    @Shadow(remap = false)
+    public abstract Block getBlockID();
+
     @Override
     public void ntnhcore$setHolder(EntityLivingBase holder) {
         gravityGunFix$holder = holder instanceof EntityPlayer ? new WeakReference<>((EntityPlayer) holder) : null;
+    }
+
+    @Override
+    public ItemStack ntnhcore$getRenderedStack() {
+        return dataWatcher.getWatchableObjectItemStack(RENDERED_STACK_ID);
+    }
+
+    @Inject(method = "entityInit", at = @At("RETURN"))
+    private void gravityGunFix$addRenderedStack(CallbackInfo ci) {
+        dataWatcher.addObjectByDataType(RENDERED_STACK_ID, 5);
+    }
+
+    @Unique
+    private void gravityGunFix$updateRenderedStack() {
+        if (gravityGunFix$stack != null && GravityGunFix.isMadeGrabbable(getBlockID())) {
+            ItemStack stack = gravityGunFix$stack.copy();
+            // Includes the ones added by its addons, e.g. StorageDrawersNatura
+            boolean isDrawer = Block.blockRegistry.getNameForObject(getBlockID())
+                .startsWith("StorageDrawers");
+            if (isDrawer && stack.hasTagCompound()
+                && stack.getTagCompound()
+                    .hasKey("tile")) {
+                // The contents of a sealed drawer, clients only need to know that it's sealed
+                stack.getTagCompound()
+                    .setTag("tile", new NBTTagCompound());
+            }
+            dataWatcher.updateObject(RENDERED_STACK_ID, stack);
+        }
     }
 
     /**
@@ -90,6 +125,7 @@ public abstract class MixinEntityBlock extends Entity implements IHeldBlock {
         setBlockIdAndMeta(broken.block, broken.meta);
         gravityGunFix$stack = broken.stack;
         gravityGunFix$data = broken.data;
+        gravityGunFix$updateRenderedStack();
         return true;
     }
 
@@ -152,6 +188,7 @@ public abstract class MixinEntityBlock extends Entity implements IHeldBlock {
                 .hasNoTags()) {
             tileEntity = null;
         }
+        gravityGunFix$updateRenderedStack();
     }
 
     @Inject(method = "writeEntityToNBT", at = @At("RETURN"))

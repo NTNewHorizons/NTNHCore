@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.ntnh.ntnhcore.Config;
+import com.ntnh.ntnhcore.modules.thomass47.gravitygunfix.GravityGunFix;
 import com.ntnh.ntnhcore.modules.thomass47.gravitygunfix.IHeldBlock;
 
 import gravigun.common.GraviGun;
@@ -46,6 +47,7 @@ public class MixinTickHandlerServer {
             return false;
         }
         // The original already allows this when grabbing up close
-        return block.getRenderType() == 22 && GraviGun.getSettings("grabChestTypeAllowed") == 1;
+        boolean isGrabbableChest = block.getRenderType() == 22 && GraviGun.getSettings("grabChestTypeAllowed") == 1;
+        return isGrabbableChest || GravityGunFix.isMadeGrabbable(block);
     }
 }

@@ -41,7 +41,12 @@ public class Config {
     public static String[] gravityGunFixKeepDataBlocks = { "minecraft:chest", "minecraft:trapped_chest",
         "minecraft:furnace", "minecraft:lit_furnace", "minecraft:dispenser", "minecraft:dropper", "minecraft:jukebox",
         "rechests:*", "IronChest:BlockIronChest", "etfuturum:*barrel", "etfuturum:smoker", "etfuturum:lit_smoker",
-        "etfuturum:blast_furnace", "etfuturum:lit_blast_furnace" };
+        "etfuturum:blast_furnace", "etfuturum:lit_blast_furnace", "StorageDrawers*:fullDrawers*",
+        "StorageDrawers*:halfDrawers*", "StorageDrawers:compDrawers", "StorageDrawers:fullCustom*",
+        "StorageDrawers:halfCustom*" };
+    public static String[] gravityGunFixGrabbableBlocks = { "StorageDrawers*:fullDrawers*",
+        "StorageDrawers*:halfDrawers*", "StorageDrawers:compDrawers", "StorageDrawers:fullCustom*",
+        "StorageDrawers:halfCustom*" };
 
     public static void synchronizeConfiguration(File configFile) {
         configuration = new Configuration(configFile);
@@ -150,12 +155,17 @@ public class Config {
             "superchargedPulling",
             "modules.gravitygunfix",
             gravityGunFixSuperchargedPulling,
-            "Let the supercharged gun pull chests from a distance, like it could for other blocks.");
+            "Let the supercharged gun pull chests and grabbableBlocks from a distance, like it could for other blocks.");
         gravityGunFixKeepDataBlocks = configuration.getStringList(
             "keepDataBlocks",
             "modules.gravitygunfix",
             gravityGunFixKeepDataBlocks,
             "Blocks that keep all of their data when moved by GravityGun. Supports * as a wildcard.\nDon't add multiblocks or anything that remembers where it or other blocks are, moving those will break them.");
+        gravityGunFixGrabbableBlocks = configuration.getStringList(
+            "grabbableBlocks",
+            "modules.gravitygunfix",
+            gravityGunFixGrabbableBlocks,
+            "Blocks that GravityGun can grab even though they aren't full blocks. Supports * as a wildcard.\nThey only keep their data if they're in keepDataBlocks too.");
 
         if (configuration.hasChanged()) {
             configuration.save();
