@@ -10,30 +10,13 @@ Each module can be enabled or disabled via the `modules` category in the config:
 
 ```
 modules {
-    B:enable_fastequip=true
-    B:enable_grassisannoying=true
     B:enable_coloredhearts=true
     B:enable_betterplacement=true
-    B:enable_whitelistdementianomore=true
     B:enable_gravitygunfix=true
 }
 ```
 
-Module-specific settings appear under their own subcategory (e.g. `modules.fastequip`, `modules.grassisannoying`) and are present in the config file regardless of whether the module is enabled.
-
-### FastEquip
-
-Right-click to equip armor from hotbar or inventory.
-
-- `isHotbarFastEquipEnabled` - right-click armor in hotbar to equip
-- `isInventoryFastEquipEnabled` - right-click armor in inventory to equip
-
-### GrassIsAnnoying
-
-Attack entities through grass and hide the block outline when aiming at an entity through a non-colliding block.
-
-- `isModEnabled` - enable attacking through grass
-- `hideBlockOutline` - hide the block outline when aiming at an entity through grass
+Module-specific settings appear under their own subcategory and are present in the config file regardless of whether the module is enabled.
 
 ### ColoredHearts
 
@@ -47,12 +30,6 @@ Snappier block placement by removing the right-click delay when moving the curso
 
 - `creativeOnly` - only apply in creative mode
 - `forceNewLoc` - require cursor movement between successive placements
-
-### WhitelistDementiaNoMore
-
-Fixes server whitelist offline mode UUID mismatches when adding players to the whitelist.
-
-- No additional config options (controlled by module enable toggle)
 
 ### GravityGunFix
 
