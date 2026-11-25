@@ -37,6 +37,7 @@ public class Config {
 
     // GravityGunFix module - make GravityGun break and place blocks properly
     public static int gravityGunFixMaxBreaks = 4;
+    public static boolean gravityGunFixSuperchargedPulling = true;
     public static String[] gravityGunFixKeepDataBlocks = { "minecraft:chest", "minecraft:trapped_chest",
         "minecraft:furnace", "minecraft:lit_furnace", "minecraft:dispenser", "minecraft:dropper", "minecraft:jukebox",
         "rechests:*", "IronChest:BlockIronChest", "etfuturum:*barrel", "etfuturum:smoker", "etfuturum:lit_smoker",
@@ -145,6 +146,11 @@ public class Config {
             1,
             16,
             "How many times to break what's left in the block's place before giving up. Some assembled NTM multiblock parts turn back into their original block when broken, so they need at least 2 to be grabbed.");
+        gravityGunFixSuperchargedPulling = configuration.getBoolean(
+            "superchargedPulling",
+            "modules.gravitygunfix",
+            gravityGunFixSuperchargedPulling,
+            "Let the supercharged gun pull chests from a distance, like it could for other blocks.");
         gravityGunFixKeepDataBlocks = configuration.getStringList(
             "keepDataBlocks",
             "modules.gravitygunfix",

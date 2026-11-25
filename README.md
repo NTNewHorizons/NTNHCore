@@ -59,4 +59,5 @@ Fixes server whitelist offline mode UUID mismatches when adding players to the w
 Makes GravityGun break and place blocks properly instead of moving their tile entity NBT, which broke multiblocks and machines. Contents are kept for blocks that keep them when mined (e.g. batteries and crates), and dropped otherwise.
 
 - `maxBreaks` - how many times to break a block that turns into another one, like assembled multiblock parts
+- `superchargedPulling` - let the supercharged gun pull chests from a distance, like it could for other blocks
 - `keepDataBlocks` - blocks that keep all of their data when moved (e.g. chests), supports `*` as a wildcard
