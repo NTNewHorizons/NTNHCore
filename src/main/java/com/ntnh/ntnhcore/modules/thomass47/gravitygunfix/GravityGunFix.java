@@ -98,7 +98,7 @@ public class GravityGunFix implements IModule {
     }
 
     /**
-     * The tile entity isn't kept, but blocks like batteries and crates save their contents to the item they drop when
+     * The tile entity isn't kept, but blocks like batteries save their contents to the item they drop when
      * mined, so that item is carried and later placed instead of being dropped.
      */
     private static BrokenBlock breakTileEntityBlock(World world, int x, int y, int z, Block block, int meta) {

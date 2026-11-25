@@ -75,15 +75,17 @@ public abstract class MixinEntityBlock extends Entity implements IHeldBlock {
     private void gravityGunFix$updateRenderedStack() {
         if (gravityGunFix$stack != null && GravityGunFix.isMadeGrabbable(getBlockID())) {
             ItemStack stack = gravityGunFix$stack.copy();
-            // Includes the ones added by its addons, e.g. StorageDrawersNatura
-            boolean isDrawer = Block.blockRegistry.getNameForObject(getBlockID())
-                .startsWith("StorageDrawers");
-            if (isDrawer && stack.hasTagCompound()
-                && stack.getTagCompound()
-                    .hasKey("tile")) {
-                // The contents of a sealed drawer, clients only need to know that it's sealed
-                stack.getTagCompound()
-                    .setTag("tile", new NBTTagCompound());
+            NBTTagCompound tag = stack.getTagCompound();
+            if (tag != null) {
+                // Clients don't need to know the contents
+                String name = Block.blockRegistry.getNameForObject(getBlockID());
+                if (name.equals("etfuturum:shulker_box")) {
+                    tag.removeTag("Items");
+                } else if (name.startsWith("StorageDrawers") && tag.hasKey("tile")) {
+                    // Includes the ones added by its addons, e.g. StorageDrawersNatura.
+                    // Only having this at all is what makes it look sealed.
+                    tag.setTag("tile", new NBTTagCompound());
+                }
             }
             dataWatcher.updateObject(RENDERED_STACK_ID, stack);
         }

@@ -22,7 +22,7 @@ import gravigun.common.entity.EntityBlock;
 @Mixin(value = RenderBlock.class, remap = false)
 public class MixinRenderBlock {
 
-    // Drawers are only rendered by their item renderer
+    // Drawers are only rendered by their item renderer, and shulker boxes would look like regular chests
     @Redirect(
         method = "renderBlock",
         at = @At(

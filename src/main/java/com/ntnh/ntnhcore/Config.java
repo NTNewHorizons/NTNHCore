@@ -42,12 +42,13 @@ public class Config {
         "minecraft:furnace", "minecraft:lit_furnace", "minecraft:dispenser", "minecraft:dropper", "minecraft:hopper",
         "minecraft:jukebox", "minecraft:ender_chest", "minecraft:mob_spawner", "rechests:*", "IronChest:BlockIronChest",
         "etfuturum:*barrel", "etfuturum:smoker", "etfuturum:lit_smoker", "etfuturum:blast_furnace",
-        "etfuturum:lit_blast_furnace", "etfuturum:beehive", "etfuturum:bee_nest", "StorageDrawers*:fullDrawers*",
-        "StorageDrawers*:halfDrawers*", "StorageDrawers:compDrawers", "StorageDrawers:fullCustom*",
-        "StorageDrawers:halfCustom*" };
-    public static String[] gravityGunFixGrabbableBlocks = { "minecraft:hopper", "StorageDrawers*:fullDrawers*",
-        "StorageDrawers*:halfDrawers*", "StorageDrawers:compDrawers", "StorageDrawers:fullCustom*",
-        "StorageDrawers:halfCustom*" };
+        "etfuturum:lit_blast_furnace", "etfuturum:beehive", "etfuturum:bee_nest", "etfuturum:shulker_box",
+        "hbm:tile.crate_iron", "hbm:tile.crate_steel", "hbm:tile.crate_desh", "hbm:tile.crate_tungsten",
+        "hbm:tile.safe", "StorageDrawers*:fullDrawers*", "StorageDrawers*:halfDrawers*", "StorageDrawers:compDrawers",
+        "StorageDrawers:fullCustom*", "StorageDrawers:halfCustom*" };
+    public static String[] gravityGunFixGrabbableBlocks = { "minecraft:hopper", "etfuturum:shulker_box",
+        "StorageDrawers*:fullDrawers*", "StorageDrawers*:halfDrawers*", "StorageDrawers:compDrawers",
+        "StorageDrawers:fullCustom*", "StorageDrawers:halfCustom*" };
 
     public static void synchronizeConfiguration(File configFile) {
         configuration = new Configuration(configFile);
