@@ -38,13 +38,17 @@ public class MixinTickHandlerServer {
         method = "playerTick",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;isBlockNormalCubeDefault(IIIZ)Z", remap = true))
     private boolean gravityGunFix$isPullable(World world, int x, int y, int z, boolean def) {
-        if (world.isBlockNormalCubeDefault(x, y, z, def)) {
-            return true;
+        boolean isNormalCube = world.isBlockNormalCubeDefault(x, y, z, def);
+        if (!Config.moduleGravityGunFixEnabled) {
+            return isNormalCube;
         }
         Block block = world.getBlock(x, y, z);
-        if (!Config.moduleGravityGunFixEnabled || !Config.gravityGunFixSuperchargedPulling
-            || block.getBlockHardness(world, x, y, z) < 0.0F) {
+        // The original only checks this when grabbing up close
+        if (block.getBlockHardness(world, x, y, z) < 0.0F) {
             return false;
+        }
+        if (isNormalCube || !Config.gravityGunFixSuperchargedPulling) {
+            return isNormalCube;
         }
         // The original already allows this when grabbing up close
         boolean isGrabbableChest = block.getRenderType() == 22 && GraviGun.getSettings("grabChestTypeAllowed") == 1;

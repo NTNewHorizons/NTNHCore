@@ -79,9 +79,13 @@ public class GravityGunFix implements IModule {
             BrokenBlock broken = block.hasTileEntity(meta) ? breakTileEntityBlock(world, x, y, z, block, meta)
                 : breakSimpleBlock(world, x, y, z, block, meta);
 
+            // Other blocks nearby can already have filled the space, e.g. with HBM's gases
             Block left = world.getBlock(x, y, z);
-            if (left.isAir(world, x, y, z) || left.getMaterial()
-                .isLiquid()) {
+            boolean isGone = left.isAir(world, x, y, z) || left.isReplaceable(world, x, y, z)
+                || left.getMaterial()
+                    .isLiquid();
+            boolean hasContents = broken != null && broken.stack != null && broken.stack.hasTagCompound();
+            if (isGone || hasContents) {
                 return broken;
             }
         }
@@ -103,8 +107,13 @@ public class GravityGunFix implements IModule {
         int carriedMeta = meta;
         Item dropped = block.getItemDropped(meta, world.rand, 0);
         if (dropped instanceof ItemBlock && Block.getBlockFromItem(dropped) != block) {
-            carried = Block.getBlockFromItem(dropped);
-            carriedMeta = dropped.getMetadata(block.damageDropped(meta));
+            Block droppedBlock = Block.getBlockFromItem(dropped);
+            int droppedMeta = dropped.getMetadata(block.damageDropped(meta));
+            // Otherwise it only breaks into that block, like ender chests into obsidian
+            if (droppedBlock.hasTileEntity(droppedMeta)) {
+                carried = droppedBlock;
+                carriedMeta = droppedMeta;
+            }
         }
         Item carriedItem = Item.getItemFromBlock(carried);
 
@@ -239,7 +248,7 @@ public class GravityGunFix implements IModule {
 
     public static boolean placeWithData(World world, int x, int y, int z, Block block, int meta, NBTTagCompound data,
         Entity entity, EntityPlayer holder) {
-        if (!placeBlock(world, x, y, z, block, meta, null, entity, holder)) {
+        if (!placeBlock(world, x, y, z, block, meta, true, null, entity, holder)) {
             return false;
         }
         restoreData(world, x, y, z, block, meta, data);
@@ -282,15 +291,25 @@ public class GravityGunFix implements IModule {
         world.markBlockForUpdate(x, y, z);
     }
 
-    /** Places the block the way its item would. The block is responsible for creating its own tile entity. */
     public static boolean placeBlock(World world, int x, int y, int z, Block block, int meta, ItemStack carried,
         Entity entity, EntityPlayer holder) {
+        return placeBlock(world, x, y, z, block, meta, !block.hasTileEntity(meta), carried, entity, holder);
+    }
+
+    /**
+     * Places the block the way its item would. The block is responsible for creating its own tile entity.
+     *
+     * @param keepMeta Whether to keep e.g. the direction of logs and hoppers instead of having it depend on the side
+     *                 it's placed on. Blocks that face whoever places them still do.
+     */
+    private static boolean placeBlock(World world, int x, int y, int z, Block block, int meta, boolean keepMeta,
+        ItemStack carried, Entity entity, EntityPlayer holder) {
         ItemStack stack = carried != null ? carried.copy() : getItemStack(world, block, meta);
         if (!world.canPlaceEntityOnSide(block, x, y, z, true, SIDE_UP, null, stack)) {
             return false;
         }
 
-        int placedMeta = block.onBlockPlaced(world, x, y, z, SIDE_UP, 0.5F, 0.0F, 0.5F, meta);
+        int placedMeta = keepMeta ? meta : block.onBlockPlaced(world, x, y, z, SIDE_UP, 0.5F, 0.0F, 0.5F, meta);
         EntityPlayer placer = getPlacer(world, entity, holder);
         if (stack.getItem() instanceof ItemBlock && Block.getBlockFromItem(stack.getItem()) == block) {
             return ((ItemBlock) stack.getItem())

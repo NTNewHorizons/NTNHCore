@@ -40,10 +40,11 @@ public class Config {
     public static boolean gravityGunFixSuperchargedPulling = true;
     public static String[] gravityGunFixKeepDataBlocks = { "minecraft:chest", "minecraft:trapped_chest",
         "minecraft:furnace", "minecraft:lit_furnace", "minecraft:dispenser", "minecraft:dropper", "minecraft:hopper",
-        "minecraft:jukebox", "rechests:*", "IronChest:BlockIronChest", "etfuturum:*barrel", "etfuturum:smoker",
-        "etfuturum:lit_smoker", "etfuturum:blast_furnace", "etfuturum:lit_blast_furnace",
-        "StorageDrawers*:fullDrawers*", "StorageDrawers*:halfDrawers*", "StorageDrawers:compDrawers",
-        "StorageDrawers:fullCustom*", "StorageDrawers:halfCustom*" };
+        "minecraft:jukebox", "minecraft:ender_chest", "minecraft:mob_spawner", "rechests:*", "IronChest:BlockIronChest",
+        "etfuturum:*barrel", "etfuturum:smoker", "etfuturum:lit_smoker", "etfuturum:blast_furnace",
+        "etfuturum:lit_blast_furnace", "etfuturum:beehive", "etfuturum:bee_nest", "StorageDrawers*:fullDrawers*",
+        "StorageDrawers*:halfDrawers*", "StorageDrawers:compDrawers", "StorageDrawers:fullCustom*",
+        "StorageDrawers:halfCustom*" };
     public static String[] gravityGunFixGrabbableBlocks = { "minecraft:hopper", "StorageDrawers*:fullDrawers*",
         "StorageDrawers*:halfDrawers*", "StorageDrawers:compDrawers", "StorageDrawers:fullCustom*",
         "StorageDrawers:halfCustom*" };
