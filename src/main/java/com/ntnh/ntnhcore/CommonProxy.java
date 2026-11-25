@@ -5,6 +5,7 @@ import com.ntnh.ntnhcore.modules.bufka.commandcompletion.CommandCompletion;
 import com.ntnh.ntnhcore.modules.ntnh.coloredhearts.ColoredHearts;
 import com.ntnh.ntnhcore.modules.thomass47.fastequip.FastEquip;
 import com.ntnh.ntnhcore.modules.thomass47.grassisannoying.GrassIsAnnoying;
+import com.ntnh.ntnhcore.modules.thomass47.gravitygunfix.GravityGunFix;
 import com.ntnh.ntnhcore.modules.thomass47.whitelistdementianomore.WhitelistDementiaNoMore;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -35,6 +36,7 @@ public class CommonProxy {
         ModuleManager.register(new GrassIsAnnoying());
         ModuleManager.register(new ColoredHearts());
         ModuleManager.register(new WhitelistDementiaNoMore());
+        ModuleManager.register(new GravityGunFix());
         ModuleManager.register(new CommandCompletion());
     }
 

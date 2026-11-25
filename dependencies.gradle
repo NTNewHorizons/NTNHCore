@@ -35,4 +35,7 @@
  */
 dependencies {
     //runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.69-GTNH:dev")
+
+    devOnlyNonPublishable(rfg.deobf("curse.maven:ichunutil-229060:2338148"))
+    devOnlyNonPublishable(rfg.deobf("curse.maven:gravity-gun-229072:2233777"))
 }
