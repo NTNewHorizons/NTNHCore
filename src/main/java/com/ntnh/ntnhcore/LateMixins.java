@@ -32,6 +32,9 @@ public class LateMixins implements ILateMixinLoader {
                 mixins.add("gravigun.MixinRenderBlock");
             }
         }
+        if (loadedMods.contains("harvestthenether")) {
+            mixins.add("harvestthenether.MixinHarvestTheNether");
+        }
         return mixins;
     }
 }
