@@ -19,6 +19,7 @@ public class Config {
     public static boolean moduleColoredHeartsEnabled = true;
     public static boolean moduleBetterPlacementEnabled = true;
     public static boolean moduleGravityGunFixEnabled = true;
+    public static boolean moduleHarvestTheNetherFixEnabled = true;
 
     // BetterPlacement module - snappier block placement
     public static boolean betterPlacementCreativeOnly = false;
@@ -70,6 +71,11 @@ public class Config {
             "modules",
             moduleGravityGunFixEnabled,
             "Set to false to disable the GravityGunFix module");
+        moduleHarvestTheNetherFixEnabled = configuration.getBoolean(
+            "enable_harvestthenetherfix",
+            "modules",
+            moduleHarvestTheNetherFixEnabled,
+            "Set to false to disable the HarvestTheNetherFix module, which makes Harvest the Nether register its own Thaumcraft and MFR compatibility instead of HarvestCraft's.\nNeeds a restart.");
 
         // BetterPlacement module - snappier block placement
         configuration.setCategoryComment(
@@ -128,6 +134,8 @@ public class Config {
                 return moduleBetterPlacementEnabled;
             case "gravitygunfix":
                 return moduleGravityGunFixEnabled;
+            case "harvestthenetherfix":
+                return moduleHarvestTheNetherFixEnabled;
             default:
                 return false;
         }

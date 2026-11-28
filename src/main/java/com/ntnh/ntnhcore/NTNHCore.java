@@ -10,7 +10,13 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = NTNHCore.MODID, version = Tags.VERSION, name = "NTNHCore", acceptedMinecraftVersions = "[1.7.10]")
+@Mod(
+    modid = NTNHCore.MODID,
+    version = Tags.VERSION,
+    name = "NTNHCore",
+    acceptedMinecraftVersions = "[1.7.10]",
+    // Its config decides what HarvestTheNetherFix does during Harvest the Nether's preInit
+    dependencies = "before:harvestthenether")
 public class NTNHCore {
 
     public static final String MODID = "ntnhcore";

@@ -3,6 +3,7 @@ package com.ntnh.ntnhcore;
 import com.ntnh.ntnhcore.modules.ModuleManager;
 import com.ntnh.ntnhcore.modules.bufka.commandcompletion.CommandCompletion;
 import com.ntnh.ntnhcore.modules.ntnh.coloredhearts.ColoredHearts;
+import com.ntnh.ntnhcore.modules.ntnh.harvestthenetherfix.HarvestTheNetherFix;
 import com.ntnh.ntnhcore.modules.thomass47.gravitygunfix.GravityGunFix;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -31,6 +32,7 @@ public class CommonProxy {
     protected void registerModules() {
         ModuleManager.register(new ColoredHearts());
         ModuleManager.register(new GravityGunFix());
+        ModuleManager.register(new HarvestTheNetherFix());
         ModuleManager.register(new CommandCompletion());
     }
 

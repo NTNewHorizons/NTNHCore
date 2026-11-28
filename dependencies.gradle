@@ -38,4 +38,6 @@ dependencies {
 
     devOnlyNonPublishable(rfg.deobf("curse.maven:ichunutil-229060:2338148"))
     devOnlyNonPublishable(rfg.deobf("curse.maven:gravity-gun-229072:2233777"))
+    // Pam's Harvest the Nether 1.7.10a, only for the mixin processor to find HarvestTheNetherFix's target
+    compileOnly(rfg.deobf("curse.maven:pams-harvest-the-nether-231262:2241397"))
 }
